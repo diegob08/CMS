@@ -3,12 +3,13 @@
 function createUser($fname, $username, $password, $email, $userlvl)
 {
     include('connect.php');
-    $userString = "INSERT INTO tbl_user VALUES(NULL,'{$fname}', '{$username}', '{$password}', '{$email}', NULL, '{$userlvl}', 'no')";
+    $userString = "INSERT INTO tbl_user VALUES(NULL,'{$fname}', '{$username}', MD5('{$password}'), '{$email}', NULL, '{$userlvl}')";
     //echo $userString;
     $userQuery = mysqli_query($link, $userString);
     if ($userQuery) {
         redirect_to("admin_index.php");
     } else {
+        var_dump($userString);
         $message = "There was a problem setting up this user.  Maybe reconsider your hiring practices.";
         return $message;
     }
@@ -18,7 +19,7 @@ function createUser($fname, $username, $password, $email, $userlvl)
 function editUser($id, $fname, $username, $password, $email)
 {
     include('connect.php');
-    $updatestring = "UPDATE tbl_user SET user_fname='{$fname}', user_name='{$username}', user_pass='{$password}', user_email='{$email}' WHERE user_id={$id}";
+    $updatestring = "UPDATE tbl_user SET user_fname='{$fname}', user_name='{$username}', user_pass=MD5('{$password}'), user_email='{$email}' WHERE user_id={$id}";
     //echo $updatestring;
     $updatequery = mysqli_query($link, $updatestring);
     if ($updatequery) {

@@ -31,25 +31,25 @@ if (isset($_POST['submit'])) {
 } ?>
 <form action="admin_createuser.php" method="post">
     <label>First Name:</label>
-    <input type="text" name="fname" value="	<?php if (!empty($fname)) {
+    <input type="text" name="fname" value="<?php if (!empty($fname)) {
         echo $fname;
     } ?>
 "><br><br>
 
     <label>Username:</label>
-    <input type="text" name="username" value="	<?php if (!empty($username)) {
+    <input type="text" name="username" value="<?php if (!empty($username)) {
         echo $username;
     } ?>
 "><br><br>
 
     <label>Password:</label>
-    <input type="text" name="password" value="	<?php if (!empty($password)) {
+    <input type="text" name="password" value="<?php if (!empty($password)) {
         echo $password;
     } ?>
 "><br><br>
 
     <label>Email:</label>
-    <input type="text" name="email" value="	<?php if (!empty($email)) {
+    <input type="text" name="email" value="<?php if (!empty($email)) {
         echo $email;
     } ?>
 "><br><br>
