@@ -16,5 +16,41 @@ confirm_logged_in();
 
 <a href="admin_index.php">Back to User Admin Page</a><br>
 <a href="phpscripts/caller.php?caller_id=logout">Sign Out</a>
+
+
+<?php $tbl = "tbl_movies";
+$getMovies = getAll($tbl); ?>
+<h3>Current List: <?php echo $getMovies->num_rows; ?> Movies</h3>
+<table>
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Thumbnail</th>
+        <th>Title</th>
+        <th>Year</th>
+        <th>Operation</th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php
+    $counter = 1;
+    while ($row = mysqli_fetch_array($getMovies)): ?>
+        <tr>
+            <td><?php echo $counter; ?></td>
+            <td>
+                <img src="/images/<?php echo $row['movies_cover']; ?>" alt="<?php echo $row['movies_title']; ?>"
+                     height="150">
+            </td>
+            <td><?php echo $row['movies_title']; ?></td>
+            <td><?php echo $row['movies_year']; ?></td>
+            <td>
+                <a href="movie_edit.php?action=delete&id=<?php echo $row['movies_id']; ?>">Delete</a>
+            </td>
+        </tr>
+        <?php
+        $counter++;
+    endwhile; ?>
+    </tbody>
+</table>
 </body>
 </html>
