@@ -19,7 +19,7 @@ function addMovie($title, $cover, $year, $runtime, $storyline, $trailer, $releas
             //echo $addstring;
             $addresult = mysqli_query($link, $addstring);
             if ($addresult) {
-                $qstring = "SELECT * FROM tbl_movies ORDER BY movies_ID DESC LIMIT 1";
+                $qstring = "SELECT * FROM tbl_movies ORDER BY movies_id DESC LIMIT 1";
                 $lastmovie = mysqli_query($link, $qstring);
                 $row = mysqli_fetch_array($lastmovie);
                 $lastID = $row['movies_id'];
@@ -29,6 +29,36 @@ function addMovie($title, $cover, $year, $runtime, $storyline, $trailer, $releas
                 redirect_to("admin_index.php");
             }
         }
+    }
+    mysqli_close($link);
+}
+
+function editMovie($id, $cover, $title, $year, $runtime, $storyline, $trailer, $release)
+{
+    include('connect.php');
+    $updatestring = "UPDATE tbl_user SET movies_cover='{$cover}', movies_title='{$title}', movies_year='{$year}', movies_runtime='{$runtime}', movies_storyline='{$storyline}', movies_trailer='{$trailer}' , movies_release='{$release}' WHERE movies_id={$id}";
+    //echo $updatestring;
+    $updatequery = mysqli_query($link, $updatestring);
+    if ($updatequery) {
+        redirect_to("admin_movies.php");
+    } else {
+        $message = "There was a problem changing your information, please contact your web admin.";
+        return $message;
+    }
+    mysqli_close($link);
+}
+
+function deleteMovie($id)
+{
+    //echo $id;
+    include('connect.php');
+    $delstring = "DELETE FROM tbl_movies WHERE movies_id={$id}";
+    $delquery = mysqli_query($link, $delstring);
+    if ($delquery) {
+        redirect_to("admin_movies.php");
+    } else {
+        $message = "Failed to delete movie";
+        return $message;
     }
     mysqli_close($link);
 }

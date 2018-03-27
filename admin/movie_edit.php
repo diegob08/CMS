@@ -8,17 +8,7 @@ switch ($_GET['action']) {
         if (!isset($_GET['id'])) {
             redirect_to("../admin_movies.php");
         }
-
-
-        $delstring = "DELETE FROM tbl_movies WHERE movies_id={$_GET['id']}";
-        $delquery = mysqli_query($link, $delstring);
-        if ($delquery) {
-            redirect_to("../admin_movies.php");
-        } else {
-            $message = "Failed to delete movie";
-            return $message;
-        }
-        mysqli_close($link);
+        deleteMovie($_GET['id']);
         break;
 
     case 'edit':
@@ -29,10 +19,11 @@ switch ($_GET['action']) {
         break;
 
     case 'update':
-        if (!isset($_GET['id'])) {
-            redirect_to("../admin_movies.php");
+        if (!isset($_POST['movies_id'])) {
+            addMovie($_POST['movies_title'], $_POST['movies_cover'], $_POST['movies_year'], $_POST['movies_runtime'], $_POST['movies_storyline'], $_POST['movies_trailer'], $_POST['movies_release']);
+        } else {
+            editMovie($_POST['movies_id'], $_POST['movies_cover'], $_POST['movies_title'], $_POST['movies_year'], $_POST['movies_runtime'], $_POST['movies_storyline'], $_POST['movies_trailer'], $_POST['movies_release']);
         }
-
         break;
 
 
@@ -48,9 +39,7 @@ switch ($_GET['action']) {
 </head>
 <body>
 <a href="admin_index.php">Back to User Admin Page</a><br>
-<?php
-
-if (isset($movie_item)) {
+<?php if (isset($movie_item)) {
     $row = mysqli_fetch_array($movie_item);
     echo '<h2>Update Movie ' . $row['movies_title'] . '</h2>';
 } else {
@@ -64,12 +53,12 @@ if (isset($movie_item)) {
         'movies_storyline' => '',
     );
 
-    echo '<h2>Create New Movie Entry</h2>';
+    echo '<h2>Create New Movie Entry </h2>';
 };
 
-
 ?>
-<form action="" enctype="multipart/form-data">
+<form action="movie_edit.php?action=update" enctype="multipart/form-data" method="post">
+    <input type="hidden" name="movies_id" value="<?php echo $row['movies_id']; ?>">
     <fieldset>
         <label for="movie-title">Movie Title</label><br>
         <input id="#movie-title" type="text" name="movies_title" value="<?php echo $row['movies_title']; ?>">
