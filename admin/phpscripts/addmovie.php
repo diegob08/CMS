@@ -95,13 +95,12 @@ function deleteMovie($id)
     include('connect.php');
     $delstring = "DELETE FROM tbl_movies WHERE movies_id={$id}";
     $delquery = mysqli_query($link, $delstring);
+    $message = "Failed to delete movie";
     if ($delquery) {
-        redirect_to("admin_movies.php");
-    } else {
-        $message = "Failed to delete movie";
-        return $message;
+        $message = 'Delete Successfully!';
     }
     mysqli_close($link);
+    return $message;
 }
 
 ?>
