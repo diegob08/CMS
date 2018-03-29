@@ -45,7 +45,7 @@ $getMovies = getAll($tbl); ?>
             <td><?php echo $row['movies_title']; ?></td>
             <td><?php echo $row['movies_year']; ?></td>
             <td>
-                <a href="movie_edit.php?action=edit&id=<?php echo $row['movies_id']; ?>">Edit</a><br>
+                <a href="admin_editmovie.php?movies_id=<?php echo $row['movies_id']; ?>">Edit</a><br>
                 <a href="movie_edit.php?action=delete&id=<?php echo $row['movies_id']; ?>">Delete</a>
             </td>
         </tr>
