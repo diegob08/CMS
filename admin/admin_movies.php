@@ -20,6 +20,7 @@ confirm_logged_in();
 
 <?php $tbl = "tbl_movies";
 $getMovies = getAll($tbl); ?>
+<a href="admin_addmovie.php">Add New Movie</a>
 <h3>Current List: <?php echo $getMovies->num_rows; ?> Movies</h3>
 <table>
     <thead>
