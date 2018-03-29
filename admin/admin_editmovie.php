@@ -30,6 +30,9 @@ $getSelectedMovieQuery = getSingle('tbl_movies', 'movies_id', $_GET['movies_id']
     <title>Edit Movie</title>
 </head>
 <body>
+<a href="admin_movies.php">Back to Movie Admin Page</a><br>
+<a href="phpscripts/caller.php?caller_id=logout">Sign Out</a>
+
 <h1>Welcome Company Name</h1>
 <?php if (!empty($message)) {
     echo $message;

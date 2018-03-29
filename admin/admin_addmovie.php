@@ -27,6 +27,10 @@ if (isset($_POST['submit'])) {
     <title>Add Movie</title>
 </head>
 <body>
+
+<a href="admin_movies.php">Back to Movie Admin Page</a><br>
+<a href="phpscripts/caller.php?caller_id=logout">Sign Out</a>
+
 <h1>Welcome Company Name</h1>
 <?php if (!empty($message)) {
     echo $message;
